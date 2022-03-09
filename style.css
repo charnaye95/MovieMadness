@@ -1,0 +1,27 @@
+html {
+    font-family: 'Rock Salt', cursive;
+    background-image: url(./steve-johnson-oE9DMOhzswM-unsplash.5.jpg);
+    background-size:  cover;
+    background-position: center;
+    
+}   
+.categories {
+    text-align: center;
+}
+button {
+    font-family: 'Rock Salt', cursive;
+    background-color: rgb(236, 204, 20);
+}
+header {
+    text-align: center;
+}
+h2 {
+    font-size: large;
+}
+.toprow {
+    display: flex;
+    justify-content: space-between;
+    font-size:small;
+    color: white;
+font-weight: bold;
+}
