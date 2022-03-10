@@ -25,3 +25,8 @@ h2 {
     color: white;
 font-weight: bold;
 }
+.container {
+text-align: center;
+border: 150px;
+border-color: black;
+}

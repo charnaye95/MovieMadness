@@ -1,5 +1,5 @@
 // Determine page formats - popup or new page or link it dynamically with html for questions to appear
-// connect API: https://opentdb.com/
+// connect API: https://opentdb.com/ DONE
 //pull questions from API at random
 //pull corresponding multiple choice answers 
 // Make buttons clickable
