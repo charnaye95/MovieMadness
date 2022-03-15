@@ -43,8 +43,14 @@ h2 {
 }
 
 .container {
-visibility: hidden;    
-text-align: center;
-    border: 150px;
-    border-color: black;
+    visibility: hidden;
+    text-align: center;
+    border: 3px solid black;
+    background-color: white;
+    opacity: 75%;
+    font-size: small;
 }
+.answers {
+    display: flex;
+    flex-direction: row;   
+justify-content: space-between;}
