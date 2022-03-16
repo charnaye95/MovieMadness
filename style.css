@@ -1,19 +1,14 @@
 html {
     font-family: 'Rock Salt', cursive;
-    background-image: url(./steve-johnson-oE9DMOhzswM-unsplash.5.jpg);
+    background-image: url(./film.avif);
     background-size: cover;
     background-position: center;
 
 }
 
-.categories {
-    visibility: hidden;
-    text-align: center;
-}
-
 button {
     font-family: 'Rock Salt', cursive;
-    background-color: rgb(236, 204, 20);
+    background-color: rgb(221, 69, 22);
 }
 
 header {
@@ -22,6 +17,7 @@ header {
 
 h2 {
     font-size: large;
+    color: white;
 }
 
 .opener {
@@ -49,8 +45,12 @@ h2 {
     background-color: white;
     opacity: 75%;
     font-size: small;
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 2;
 }
-.answers {
-    display: flex;
-    flex-direction: row;   
-justify-content: space-between;}
+
+.next {
+    visibility: hidden;
+    text-align: right;
+}
