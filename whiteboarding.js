@@ -7,4 +7,6 @@
 //function to differentiate between what is correct and what isn't
 
 // 3.15 REDIRECT - letting the API go and creating my own question ans answers
+//function to add money to the bank when a question is correct
+//function to differentiate between what is correct and what isn't
 

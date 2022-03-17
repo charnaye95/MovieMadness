@@ -3,15 +3,14 @@ let open = document.querySelector('.opener');
 let player = document.querySelector('#player');
 let scoreboard = document.querySelector('#score');
 let question = document.querySelector('#question');
-let answerA = document.querySelector('#choiceA');
-let answerB = document.querySelector('#choiceB');
-let answerC = document.querySelector('#choiceC');
-let answerD = document.querySelector('#choiceD');
 let choices = document.querySelectorAll('.answers');
 let nextButton = document.querySelector('.next');
+let score = 100;
+let noRepeatQs = [];
+// let rightAnswer = false;
 
 //click to hide open
-open.addEventListener('click', (event,playerName) => {
+open.addEventListener('click', (event, playerName) => {
     event.target.hidden = true;
     playerName = prompt("What is you name?");
     player.innerHTML = playerName;
@@ -21,42 +20,135 @@ open.addEventListener('click', (event,playerName) => {
 })
 
 
-filmQuestionsArr = ["1. Which film did Leonardo Dicaprio win his first Oscar for Best Actor?", "2. What is the highest-grossing box office film of all time?", "3.", "4. ", "5. ", "6. ", "7. ", "8. ", "9. ", "10. "];
+filmQuestionsArr = [
+    "Which film did Leonardo Dicaprio win his first Oscar for Best Actor?",
+    "What is the highest-grossing box office film of all time?",
+    "Who of these is an EGOT winner, meaning they have received an Emmy, Grammy, Oscar, and Tony Award?",
+    "",
+    " ",
+    "Which actress starred in Breakfast at Tiffany's?",
+    " ",
+    "What genre has made the most revenue over the last 10 years?",
+    "Who has Will Smith, NOT portrayed in a biopic?",
+    "What company owns Marvel?"];
+
 filmAnswers = [
-                {text: "A: The Revenant", correct: true},
-                {text: "B: What's Eating Gilbert Grape", correct: false},
-                {text: "C: Titanic", correct: false},
-                {text: "D: The Wolf of Wall Street", correct: false}
-            ], 
-            [
-                {text: "A: Avengers: Endgame", correct: false},
-                {text: "B: Frozen", correct: false},
-                {text: "C: Avatar", correct: true},
-                {text: "D: Star Wars: The Force Awakens", correct: false}
+    [
+        { text: "A: The Revenant", correct: true },
+        { text: "B: What's Eating Gilbert Grape", correct: false },
+        { text: "C: Titanic", correct: false },
+        { text: "D: The Wolf of Wall Street", correct: false }
+    ],
+    [
+        { text: "A: Avengers: Endgame", correct: false },
+        { text: "B: Frozen", correct: false },
+        { text: "C: Avatar", correct: true },
+        { text: "D: Star Wars: The Force Awakens", correct: false }
+    ],
+    [
+        { text: "A: Meryl Streep", correct: false },
+        { text: "B: Rita Moreno", correct: true },
+        { text: "C: Denzel Washington", correct: false },
+        { text: "D: Robert De Niro", correct: false }
+    ],
+    [
+        { text: "thanks", correct: false },
+        { text: "yo", correct: false },
+        { text: "j", correct: true },
+        { text: "D: oooo", correct: false }
+    ],
+    [
+        { text: "A: hytde", correct: false },
+        { text: "B: Fdf", correct: false },
+        { text: "C: Avase", correct: true },
+        { text: "D: Staraaece Awakens", correct: false }
+    ],
+    [
+        { text: "Jane Fonda", correct: false },
+        { text: "Audrey Hepburn", correct: true },
+        { text: "Marilyn Monroe", correct: false },
+        { text: "Julie Andrews", correct: false }
+    ],
 
-            ]
-   // add Event Listeners
-   
-        
-       for (let i=0; i<filmAnswers.length; i++) {
-        question.innerHTML = filmQuestionsArr[0];
-        choices[i].innerHTML = filmAnswers[i].text;
-        // console.log(filmAnswers[i].text);
-       } 
-        // console.log(event.target.innerHTML)
-        choices.forEach(elem => {
-            elem.addEventListener('click', () => {
-        //    document.body.children[5].style.color = "white";
-    })
-}) 
+    [
+        { text: "6", correct: false },
+        { text: "33n", correct: false },
+        { text: "Cvvvvssssdddd", correct: true },
+        { text: "wwerttyyy", correct: false },
+    ],
+    [
+        { text: "A: Drama", correct: false },
+        { text: "B: Comedy", correct: false },
+        { text: "C: Action", correct: false },
+        { text: "D: Adventure", correct: true }
+    ],
+    [
+        { text: "Muhammad Ali", correct: false },
+        { text: "Richard Williams", correct: false },
+        { text: "Chris Gardner", correct: false },
+        { text: "Malcolm X", correct: true}
+    ],
+    [
+        { text: "Sony", correct: false },
+        { text: "Paramount", correct: false },
+        { text: "Disney", correct: true },
+        { text: "Netflix", correct: false }
+    ],
 
+]
+//creating a function for quesitons and answers to appear each time
+function showQAndA() {
+    let random = Math.floor(Math.random() * (filmQuestionsArr.length))
+    if (noRepeatQs.includes(random)) {
+        showQAndA();
+        return
+    }
+    noRepeatQs.push(random);
+    console.log(noRepeatQs);
+    question.innerHTML = filmQuestionsArr[random];
+    for (let i = 0; i < 4; i++) {
+        choices[i].innerHTML = filmAnswers[random][i].text;
+        // choices[i].setAttribute("right", filmAnswers[random][i].correct)
+    }
+}
+showQAndA();
+
+
+//function to check the answer is right or wrong to a question
 function checkAnswer() {
-
+    choices.forEach(elem => {
+        elem.addEventListener('click', () => {
+            // rightAnswer = elem.getAttribute("right") == "true"
+            // alert("That is correct! Click next!")
+            //     scoreboard.innerHTML = `$ ${score += 100}`;
+            // } else {
+            //     alert("That is incorrect! Better next time. Click next")
+            //     scoreboard -= 100;
+            // }
+        })
+    })
 }
+checkAnswer();
 
+//trying to tie a function to clicking the next button that will then show the next randomized question in the array
 function nextQuestion() {
+    nextButton.addEventListener('click', () => {
+        if (noRepeatQs.length === 9) {
+            win();
+        }
+        showQAndA();
 
+    })
 }
-//winning condiitons
+nextQuestion();
 
+// winning conditons
+// function win() {
+// if (scoreboard.innerHTML === 800) {
+//     window.prompt("You are a true film buff!")
+// } else {
+//     window.prompt("Try again.")
+//     }
+// }
+// win();
 
