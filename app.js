@@ -5,9 +5,8 @@ let scoreboard = document.querySelector('#score');
 let question = document.querySelector('#question');
 let choices = document.querySelectorAll('.answers');
 let nextButton = document.querySelector('.next');
-let score = 100;
+let score = 0;
 let noRepeatQs = [];
-// let rightAnswer = false;
 
 //click to hide open
 open.addEventListener('click', (event, playerName) => {
@@ -24,7 +23,7 @@ filmQuestionsArr = [
     "Which film did Leonardo Dicaprio win his first Oscar for Best Actor?",
     "What is the highest-grossing box office film of all time?",
     "Who of these is an EGOT winner, meaning they have received an Emmy, Grammy, Oscar, and Tony Award?",
-    "",
+    "Who of these has NOT acted as the Joker in a film?",
     " ",
     "Which actress starred in Breakfast at Tiffany's?",
     " ",
@@ -52,10 +51,10 @@ filmAnswers = [
         { text: "D: Robert De Niro", correct: false }
     ],
     [
-        { text: "thanks", correct: false },
-        { text: "yo", correct: false },
-        { text: "j", correct: true },
-        { text: "D: oooo", correct: false }
+        { text: "Willem Dafoe", correct: false },
+        { text: "Heath Ledger", correct: false },
+        { text: "Joaquin Phoenix", correct: true },
+        { text: "Jared Leto", correct: false }
     ],
     [
         { text: "A: hytde", correct: false },
@@ -96,11 +95,13 @@ filmAnswers = [
     ],
 
 ]
-//creating a function for quesitons and answers to appear each time
-function showQAndA() {
+
+//creating a function for questions and answers to appear each time
+let playerAnswer = null;
+function playGame() {
     let random = Math.floor(Math.random() * (filmQuestionsArr.length))
     if (noRepeatQs.includes(random)) {
-        showQAndA();
+        playGame();
         return
     }
     noRepeatQs.push(random);
@@ -108,35 +109,48 @@ function showQAndA() {
     question.innerHTML = filmQuestionsArr[random];
     for (let i = 0; i < 4; i++) {
         choices[i].innerHTML = filmAnswers[random][i].text;
-        // choices[i].setAttribute("right", filmAnswers[random][i].correct)
     }
-}
-showQAndA();
-
-
-//function to check the answer is right or wrong to a question
-function checkAnswer() {
-    choices.forEach(elem => {
-        elem.addEventListener('click', () => {
-            // rightAnswer = elem.getAttribute("right") == "true"
-            // alert("That is correct! Click next!")
-            //     scoreboard.innerHTML = `$ ${score += 100}`;
-            // } else {
-            //     alert("That is incorrect! Better next time. Click next")
-            //     scoreboard -= 100;
-            // }
+    choices.forEach((elem, index) => {
+        elem.addEventListener('click', (event) => {
+            playerAnswer = index;
+            console.log(filmAnswers[random][playerAnswer].correct);
+            if (filmAnswers[random][playerAnswer].correct === true) {
+                scoreboard.innerHTML = `BANK $${score += 100}`;
+                event.target.style.backgroundColor = "green";           
+                for (let j=0; j < choices.length; j++) {
+                    choices[j].disabled = true;
+                }
+                alert("That is correct! Click next!")
+                // nextQuestion();
+            } else {
+                alert("Incorrect. Better luck next time. Click next!")
+                for (let k=0; k < choices.length; k++) {
+                    choices[k].disabled = true;
+                }
+            }
         })
     })
 }
-checkAnswer();
+playGame();
+
+
+//function to check the answer is right or wrong to a question
+// function checkAnswer() {
+
+// }
+// checkAnswer();
 
 //trying to tie a function to clicking the next button that will then show the next randomized question in the array
 function nextQuestion() {
     nextButton.addEventListener('click', () => {
+        for (let l=0; l < choices.length; l++) {
+        choices[l].disabled = false;
+        choices[l].style.backgroundColor = "rgb(221, 69, 22";
+        }
         if (noRepeatQs.length === 9) {
             win();
         }
-        showQAndA();
+        playGame();
 
     })
 }
