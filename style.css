@@ -50,7 +50,13 @@ h2 {
     grid-column-end: 2;
 }
 
-.next {
+#reset {
     visibility: hidden;
-    text-align: right;
+    float: left;
 }
+#next {
+    visibility: hidden;
+    display: flex;
+    float: right;
+}
+ 

@@ -1,6 +1,27 @@
-# project1
+# Movie Madness - Trivia
+
+**Live Link:** [alt text](link to game)
+
+
+## Screenshots
+![alt text](link to image)
+![alt text](link to image)
+
+## Technologies Used:
+-HTML
+-CSS
+-JavaScript
+
 Trivia
-Sources Used: 
+
+## User Stories
+
+## Wireframes
+
+## Unsolved Problems or Major Hurdles
+
+
+# Sources Used: 
 https://stackoverflow.com/questions/59037553/fetch-multiple-urls-at-the-same-time
 https://unsplash.com/photos/WevidclYpdc
 https://code-boxx.com/allow-one-click-javascript/
